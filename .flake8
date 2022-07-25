@@ -1,0 +1,9 @@
+[flake8]
+exclude=
+    templates
+    media
+    venv
+    .idea
+max-line-length=120
+format=html
+htmldir=flake-report
