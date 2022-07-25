@@ -37,7 +37,7 @@ def show_summary():
             return render_template('index.html'), 400
 
         flash('Unknown email', 'error')
-        return render_template('index.html'), 401
+        return render_template('index.html'), 400
 
 
 @app.route('/book/<competition>/<club>')
@@ -53,14 +53,23 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchase_places():
-    competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-    club = [c for c in clubs if c['name'] == request.form['club']][0]
-    places_required = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
-    club['points'] = int(club['points']) - places_required
-    flash('Booking complete!', 'success')
-    return render_template('welcome.html', club=club, competitions=competitions)
+    try:
+        competition = [c for c in competitions if c['name'] == request.form['competition']][0]
+        club = [c for c in clubs if c['name'] == request.form['club']][0]
+        places_required = int(request.form['places'])
 
+        if places_required > 12:
+            flash("No more than 12 places can be purchased.", 'error')
+        else:
+            competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
+            club['points'] = int(club['points']) - places_required
+            flash('Booking complete!', 'success')
+        return render_template('welcome.html', club=club, competitions=competitions)
+
+    except ValueError:
+        flash('Purchase refused to invalid request.', 'error')
+
+    return render_template('booking.html', club=club, competition=competition), 400
 
 # TODO: Add route for points display
 

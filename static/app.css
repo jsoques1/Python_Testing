@@ -7,6 +7,13 @@ html {
     font-family: Arial;
 }
 
+ul {
+  list-style-type: circle;
+}
+
+ul li {
+  margin-bottom: 40px;
+}
 
 textarea {
     width: 80%;
