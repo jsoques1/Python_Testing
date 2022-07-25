@@ -32,7 +32,7 @@ def show_summary():
         club = [club for club in clubs if club["email"] == request.form["email"]][0]
         return render_template("welcome.html", club=club, competitions=competitions)
     except IndexError as error:
-        if not request.form['email'] :
+        if not request.form['email']:
             flash("Please enter your email.", 'error')
             return render_template('index.html'), 400
 
@@ -56,8 +56,9 @@ def purchase_places():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     places_required = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-places_required
-    flash('Great-booking complete!')
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
+    club['points'] = int(club['points']) - places_required
+    flash('Booking complete!', 'success')
     return render_template('welcome.html', club=club, competitions=competitions)
 
 

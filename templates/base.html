@@ -1,16 +1,14 @@
 <!doctype html>
-<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='app.css') }}" />
         <title>GUDLFT</title>
     </head>
-    <body>
         <div class="top_bar">
             <p class="title_centered"><strong>GUDLFT</strong></p>
         </div>
-    </br></br>
+    <br/><br/>
 
 {% with messages = get_flashed_messages(with_categories=True) %}
   {% if messages %}
@@ -21,4 +19,5 @@
     </ul>
   {% endif %}
 {% endwith %}
-        {% block body %}{% endblock %}
+
+{% block body %}{% endblock %}
