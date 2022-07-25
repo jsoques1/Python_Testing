@@ -15,9 +15,23 @@ ul li {
   margin-bottom: 40px;
 }
 
+th {
+    background: rgba(95, 94, 94, 0.933);
+    color: white;
+}
+
+td {
+}
+
+.td_right {
+    text-align: right;
+    font-weight: bold;
+}
+
 textarea {
     width: 80%;
 }
+
 
 .top_bar {
     height: 50px;
@@ -54,6 +68,10 @@ textarea {
     justify-content: space-around;
 }
 
+.index {
+    font-size: 1.5em;
+    font-weight: bold;
+}
 /*
 .action-button {
     display: flex;

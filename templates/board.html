@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body %}
+    <a class="index" href="{{ url_for('index') }}">Booking manager</a>
+    <br/>
+    <br/>
+    <h2>Clubs board</h2>
+    <table>
+      <thead>
+          <tr>
+              <th>name</th>
+              <th>email</th>
+              <th>points</th>
+          </tr>
+      </thead>
+      <tbody>
+
+        {% for club in clubs %}
+          <tr>
+            <td>{{club['name']}}</td>
+            <td>{{club['email']}}</td>
+            <td class="td_right">{{club['points']}}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <br/>
+    <br/>
+    <h2>Competitions</h2>
+
+    <table>
+      <thead>
+          <tr>
+              <th>name</th>
+              <th>date</th>
+              <th>numberOfPlaces</th>
+          </tr>
+      </thead>
+      <tbody>
+
+        {% for competition in competitions %}
+          <tr>
+            <td>{{competition['name']}}</td>
+            <td>{{competition['date']}}</td>
+            <td class="td_right">{{competition['numberOfPlaces']}}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+
+{% endblock %}

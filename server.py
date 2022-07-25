@@ -21,7 +21,7 @@ competitions = load_competitions()
 clubs = load_clubs()
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -72,7 +72,10 @@ def purchase_places():
         flash('Purchase refused to invalid request.', 'error')
         return render_template('booking.html', club=club, competition=competition), 400
 
-# TODO: Add route for points display
+
+@app.route('/')
+def show_board():
+    return render_template('board.html', clubs=clubs, competitions=competitions)
 
 
 @app.route('/logout')
