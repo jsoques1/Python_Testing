@@ -15,7 +15,7 @@ def load_competitions():
 
 
 app = Flask(__name__)
-app.secret_key = 'something_special'
+app.secret_key = '$25e!tiia27hdrae#vh7@_ybd=#6n8ork&#ceh^pmzlv_+l-%x'
 
 competitions = load_competitions()
 clubs = load_clubs()
@@ -28,8 +28,16 @@ def index():
 
 @app.route('/showSummary', methods=['POST'])
 def show_summary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
-    return render_template('welcome.html', club=club, competitions=competitions)
+    try:
+        club = [club for club in clubs if club["email"] == request.form["email"]][0]
+        return render_template("welcome.html", club=club, competitions=competitions)
+    except IndexError as error:
+        if not request.form['email'] :
+            flash("Please enter your email.", 'error')
+            return render_template('index.html'), 400
+
+        flash('Unknown email', 'error')
+        return render_template('index.html'), 401
 
 
 @app.route('/book/<competition>/<club>')

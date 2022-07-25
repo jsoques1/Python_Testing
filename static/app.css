@@ -1,0 +1,525 @@
+a {
+    color: white !important;
+    text-decoration: none;
+}
+
+html {
+    font-family: Arial;
+}
+
+
+textarea {
+    width: 80%;
+}
+
+.top_bar {
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    background: rgba(95, 94, 94, 0.933);
+    color: white;
+    align-items: center;
+    z-index: 1;
+}
+
+.top_bar a {
+    text-decoration: none;
+    color: #ffffe6;
+    display: block;
+}
+
+.top_bar a:hover {
+    color: #f1f1f1;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.stream {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+/*
+.action-button {
+    display: flex;
+    justify-content: center;
+}
+*/
+/*
+.action-button,
+.feed-button {
+    display: flex;
+    justify-content: center;
+}
+
+.feed-button>form {
+    margin-left: auto;
+    margin-right: auto;
+}
+*/
+/*
+.action_button  {
+    margin-left: 60%;
+    width: max-content;
+}
+
+.post img {
+    width: 80%;
+    border-radius: 5px;
+}
+*/
+
+.authenticate {
+    padding: 20px;
+    display: flex;
+    width: 90%;
+}
+
+
+.title_centered {
+    text-align: center;
+    font-size: x-large;
+}
+
+.title {
+    text-align: center;
+    margin-left: 45%;
+    font-size: x-large;
+}
+
+.menu {
+    text-align: left;
+    margin-left: 5%;
+    font-size: medium;
+}
+
+.stream {
+    display: flex;
+    justify-content: center;
+}
+
+.stream_actions {
+    display: flex;
+    justify-content: center;
+}
+
+.stream_action {
+    padding-block: 2%;
+    margin-right: 2%;
+}
+
+
+.stream_data,
+.my_posts {
+    display: flex;
+    justify-content: center;
+}
+
+.p_margin {
+    width: 1400px;
+}
+
+.a_post  {
+    display: grid;
+    border: solid 1px black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.btn {
+  /* padding-block: 2%; */
+    height: 40px;
+    border-radius:5px;
+}
+
+.inscription {
+    text-align: center;
+}
+
+
+
+.login {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.login > form > p > input{
+    display:block;
+    text-align: center;
+    width: 100%;
+    padding-block: 10px;
+}
+
+.login > form > button.btn{
+    margin-left: 70%;
+}
+
+.subscribe {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    /* padding-top: 2%; */
+}
+
+.follower-item {
+    display: flex;
+    width: 90%;
+    padding: 15px;
+    margin-left: 5%;
+    border: dotted 1px grey;
+}
+
+.subscriber {
+    display: flex;
+    margin-left: 5%;
+    width: 90%;
+    padding-top: 0%;
+    border: dotted 1px grey;
+}
+
+.follower-item>a,
+.subscription-item>a {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.subscription-item>form {
+    margin-left: auto;
+
+}
+
+.title_add_followed_user {
+    margin-top: 30px;
+    margin-left: 40%;
+    width: 100%;
+}
+
+.title_list_following_user {
+    margin-top: 30px;
+    margin-left: 47%;
+    width: 100%;
+}
+
+.title_list_followed_user {
+    margin-top: 30px;
+    margin-left: 45%;
+    width: 100%;
+}
+
+
+.add_followed_user {
+    /* border: solid 1px black; */
+    /* padding-top: 10px; */
+    width: 45%;
+    margin-left: 15%;
+}
+
+.add_followed_user>form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2%;
+}
+
+.add_followed_user>form>p>label {
+    font-variant-caps: small-caps;
+    display: none;
+}
+
+/*
+** 2nd version =====>
+*/
+
+#id_followed_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 10px;
+    width: 50%;
+    margin-left: 30%;
+    margin-right: 10px;
+    border-radius:5px;
+}
+
+.subscribed {
+    /* padding-top: 10px; */
+    /*
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 10px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    */
+    width: 40%;
+    /* margin-left: 30%; */
+    margin-right: 44%;
+    padding: 10px;
+    display: flex;
+}
+
+.subscriber {
+    /* padding-top: 10px; */
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 10px;
+    border: solid 1px;
+    padding: 10px;
+    display: flex;
+    justify-content: left;
+}
+
+.subscriber>p {
+    border: solid 1px;
+}
+
+.followed_user {
+    /* padding-top: 10px; */
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 10px;
+    border: solid 1px;
+
+    display: flex;
+    justify-content: left;
+
+
+    /*
+	border: solid 1px;
+    margin-left: 30%;
+    margin-right: 30%;
+    */
+}
+    /* padding-bottom: 4%;
+.followed_user>p {
+    border: solid 1px;
+}
+*/
+
+/*
+** 2nd version =====>
+*/
+
+.create_ticket,
+.update_ticket {
+    display: grid;
+    border: solid 1px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+}
+
+.create_review,
+.update_review {
+    display: grid;
+    border: solid 1px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+}
+
+.ticket_title,
+.review_title {
+    text-align: center;
+}
+
+/*
+input, label {
+    display:block;
+}
+*/
+
+/*
+label#id_title,
+label#id_headline,
+label#id_body,
+label#id_description,
+label#id_image
+*/
+
+label
+{
+    display:block;
+    font-weight: bold;
+}
+
+/*
+input {
+    display:block;
+    width: 80%;
+}
+*/
+
+input#id_title,
+input#id_headline,
+input#id_body,
+input#id_description,
+input#id_image {
+    width: calc(100% - 40px);
+}
+
+
+input#id_title,
+input#id_headline {
+    display: inline-block;
+    width: 80%;
+}
+
+input#id_description,
+input#id_body {
+    display: inline-block;
+    width: 80%;
+    padding: 15px 10px;
+    line-height: 400%;
+}
+
+#id_rating {
+    display: flex;
+    margin-left: 10%;
+    width: 90%;
+}
+
+#id_rating>div>label {
+
+ /*  margin-left: 10%; */
+  margin-right: 10px;
+
+}
+
+.id_rating_label {
+/*
+    width: 10px;
+    */
+}
+/*
+label:id_rating_0,
+label:id_rating_1,
+label:id_rating_2,
+label:id_rating_3,
+label:id_rating_4,
+label:id_rating_5
+ {
+     display: flex;
+   width: 30px;
+
+    margin-right: 10px;
+
+}
+*/
+
+.field {
+    font-size: medium;
+    text-align: center;
+    width: 30%;
+    padding-block: 10px;
+}
+
+.field_left {
+    font-size: medium;
+    text-align: left;
+    width: 30%;
+    padding-block: 10px;
+}
+
+.field_long {
+    font-size: medium;
+    text-align: left;
+    width: 80%;
+    padding-block: 10px;
+    font: 15px Arial;
+}
+
+.review_post {
+    display: grid;
+    border: solid 1px black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.review_header,
+.post_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review_body {
+    /* font-size: medium; */
+    /* font-size: 15px Arial; */
+    font-weight: bold;
+}
+
+.ticket_review_post {
+    display: grid;
+    justify-content: normal;
+    border: solid 1px black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.ticket_details {
+    display: grid;
+    border: solid 1px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+}
+
+.post_title {
+  font-size: medium;
+  text-align: left;
+}
+
+.post_date {
+  font-size: medium;
+  text-align: right;
+}
+
+.rating {
+    display: flex;
+    justify-content: left;
+}
+
+.star {
+    max-width: 20px;
+    max-height: 20px;
+	padding-top: 15px;
+	margin-left: 5px;
+}
+
+.image {
+	max-width: 400px;
+	max-height: 400px;
+}
+
+.ticket_post  {
+    display: grid;
+    border: solid 1px black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.action_button {
+    display: flex;
+    justify-content: right;
+    margin-right: 30px;
+}
+
