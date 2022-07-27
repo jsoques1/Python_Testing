@@ -1,6 +1,7 @@
 import pytest
 import server 
 from server import app
+from server import init_club_bookings
 
 app.config['TESTING'] = True
 
@@ -51,9 +52,9 @@ def competitions():
             "numberOfPlaces": "13"
         },
         {
-            "name": "Spring Festival",
+            "name": "Autumn Festival",
             "date": "2022-10-27 10:00:00",
-            "numberOfPlaces": "25"
+            "numberOfPlaces": "5"
         },
         {
             "name": "Planned Festival with no place",
@@ -63,7 +64,7 @@ def competitions():
         {
             "name": "Planned Festival with wrong date",
             "date": "22/10/2022 13:30:00",
-            "numberOfPlaces": "0"
+            "numberOfPlaces": "2"
         },
         {
             "name": "Planned Festival with wrong time",
@@ -78,5 +79,8 @@ def competitions():
 def client(mocker, clubs, competitions):
     mocker.patch.object(server, "clubs", clubs)
     mocker.patch.object(server, "competitions", competitions)
+    bookings = init_club_bookings(clubs, competitions)
+    mocker.patch.object(server, "bookings", bookings)
     with server.app.test_client() as client:
         yield client
+

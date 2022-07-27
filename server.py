@@ -34,14 +34,15 @@ bookings = init_club_bookings(clubs, competitions)
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html'), 200
 
 
 @app.route('/showSummary', methods=['POST'])
 def show_summary():
     try:
         club = [club for club in clubs if club["email"] == request.form["email"]][0]
-        return render_template("welcome.html", club=club, competitions=competitions, bookings=bookings[club['name']])
+        return render_template("welcome.html", club=club, competitions=competitions,
+                               bookings=bookings[club['name']]), 200
     except IndexError:
         if not request.form['email']:
             flash("Please enter your email.", 'error')
@@ -57,10 +58,10 @@ def book(competition, club):
         found_club = [c for c in clubs if c["name"] == club][0]
         found_competition = [c for c in competitions if c["name"] == competition][0]
         if found_club and found_competition:
-            return render_template('booking.html', club=found_club, competition=found_competition)
+            return render_template('booking.html', club=found_club, competition=found_competition), 200
         else:
             flash("Something went wrong-please try again")
-            return render_template('welcome.html', club=club, competitions=competitions)
+            return render_template('welcome.html', club=club, competitions=competitions), 400
     except Exception:
         flash('Booking refused to invalid request.', 'error')
         return render_template('board.html', clubs=clubs, competitions=competitions), 400
@@ -68,11 +69,19 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchase_places():
+    status_code = 400
+    print(competitions)
+    print(clubs)
+    print(bookings)
     try:
         competition = [c for c in competitions if c['name'] == request.form['competition']][0]
+        print(competition)
         club = [c for c in clubs if c['name'] == request.form['club']][0]
+        print(club)
         places_required = int(request.form['places'])
+        print(places_required)
         places_booked = bookings[request.form['club']][request.form['competition']]
+        print(places_booked)
         if places_required <= 0:
             flash('Required number of places should be at least 1', 'error')
         elif places_required > int(club['points']):
@@ -84,9 +93,10 @@ def purchase_places():
         else:
             competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
             club['points'] = int(club['points']) - places_required
-            bookings[request.form['club']][request.form['competition']] += places_required
             flash('Booking complete!', 'success')
-        return render_template('welcome.html', club=club, competitions=competitions, bookings=bookings[club['name']])
+            status_code = 200
+        return render_template('welcome.html', club=club, competitions=competitions,
+                               bookings=bookings[club['name']]), status_code
 
     except Exception:
         flash('Purchase refused to invalid request.', 'error')
@@ -101,3 +111,10 @@ def show_board():
 @app.route('/logout')
 def logout():
     return render_template('board.html', clubs=clubs, competitions=competitions)
+
+
+def get_club_competition(competition_name, club_name):
+    competition = [c for c in competitions if c['name'] == competition_name][0]
+    club = [c for c in clubs if c['name'] == club_name][0]
+
+    return competition, club
