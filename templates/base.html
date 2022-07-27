@@ -19,7 +19,7 @@
   {% if messages %}
     {% for message in messages %}
         <tr>
-            <td class="{{messages[0][0]}}"> {{messages[0][0]}} : {{messages[0][1]}} </td>
+            <td class="{{messages[0][0]}}"> {{messages[0][0]|capitalize}} : {{messages[0][1]}} </td>
         </tr>
     {% endfor %}
 

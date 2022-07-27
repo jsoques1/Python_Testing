@@ -4,7 +4,9 @@
     Places available: {{competition['numberOfPlaces']}}
     <form action="/purchasePlaces" method="post">
         <input type="hidden" name="club" value="{{club['name']}}">
+        <br/>
         <input type="hidden" name="competition" value="{{competition['name']}}">
+        <br/>
         <label>How many places?</label><input type="number" name="places" id=""/>
         <button type="submit">Book</button>
     </form>
