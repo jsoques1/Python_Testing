@@ -53,20 +53,24 @@ def show_summary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition, club):
-    found_club = [c for c in clubs if c['name'] == club][0]
-    found_competition = [c for c in competitions if c['name'] == competition][0]
-    if found_club and found_competition:
-        return render_template('booking.html', club=found_club, competition=found_competition)
-    else:
-        flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+    try:
+        found_club = [c for c in clubs if c["name"] == club][0]
+        found_competition = [c for c in competitions if c["name"] == competition][0]
+        if found_club and found_competition:
+            return render_template('booking.html', club=found_club, competition=found_competition)
+        else:
+            flash("Something went wrong-please try again")
+            return render_template('welcome.html', club=club, competitions=competitions)
+    except Exception:
+        flash('Booking refused to invalid request.', 'error')
+        return render_template('board.html', clubs=clubs, competitions=competitions), 400
 
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchase_places():
-    competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-    club = [c for c in clubs if c['name'] == request.form['club']][0]
     try:
+        competition = [c for c in competitions if c['name'] == request.form['competition']][0]
+        club = [c for c in clubs if c['name'] == request.form['club']][0]
         places_required = int(request.form['places'])
         places_booked = bookings[request.form['club']][request.form['competition']]
         if places_required <= 0:
@@ -86,7 +90,7 @@ def purchase_places():
 
     except Exception:
         flash('Purchase refused to invalid request.', 'error')
-        return render_template('booking.html', club=club, competition=competition), 400
+        return render_template('board.html', clubs=clubs, competitions=competitions), 400
 
 
 @app.route('/')
