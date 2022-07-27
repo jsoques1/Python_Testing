@@ -10,10 +10,14 @@
         <li>
             {{comp['name']}}<br/>
             Date: {{comp['date']}}<br/>
-            Number of Places: {{comp['numberOfPlaces']}}
+            Number of Places: {{comp['numberOfPlaces']}}<br/>
+            Already booked: {{bookings[comp['name']]}}
 
             {%if comp['numberOfPlaces']|int >0%}
+                <br/>
                 <a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a>
+            {% else %}
+                <p class="all_booked">All booked</p>
             {%endif%}
             <br/>
         </li>

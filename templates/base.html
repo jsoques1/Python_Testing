@@ -10,15 +10,24 @@
         </div>
     <br/><br/>
 
+ <table>
+      <thead>
+      </thead>
+      <tbody>
+
 {% with messages = get_flashed_messages(with_categories=True) %}
   {% if messages %}
-    <ul>
     {% for message in messages %}
-      <li class="{{ messages[0][0] }}">{{ message }}</li>
+        <tr>
+            <td class="{{messages[0][0]}}"> {{messages[0][0]}} : {{messages[0][1]}} </td>
+        </tr>
     {% endfor %}
-    </ul>
+
   {% endif %}
 {% endwith %}
+
+      </tbody>
+ </table>
 
 {% block body %}
 {% endblock %}

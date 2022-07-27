@@ -23,7 +23,9 @@ th {
 td {
 }
 
-.td_right {
+.points,
+.numberOfPlaces
+ {
     text-align: right;
     font-weight: bold;
 }
@@ -54,11 +56,17 @@ textarea {
 }
 
 .error {
-    color: red;
+    list-style-type: none;
+    background: red;
 }
 
 .success {
-    color: green;
+    list-style-type: none;
+    background: green;
+}
+
+.all_booked {
+    font-weight: bold;
 }
 
 .stream {

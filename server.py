@@ -14,11 +14,22 @@ def load_competitions():
         return list_of_competitions
 
 
+def init_club_bookings(list_of_clubs, list_of_competitions):
+    dict_bookings = {}
+    for club in list_of_clubs:
+        dict_bookings[club["name"]] = {}
+        for competition in list_of_competitions:
+            dict_bookings[club["name"]][competition["name"]] = 0
+
+    return dict_bookings
+
+
 app = Flask(__name__)
 app.secret_key = '$25e!tiia27hdrae#vh7@_ybd=#6n8ork&#ceh^pmzlv_+l-%x'
 
 competitions = load_competitions()
 clubs = load_clubs()
+bookings = init_club_bookings(clubs, competitions)
 
 
 @app.route('/index')
@@ -30,7 +41,7 @@ def index():
 def show_summary():
     try:
         club = [club for club in clubs if club["email"] == request.form["email"]][0]
-        return render_template("welcome.html", club=club, competitions=competitions)
+        return render_template("welcome.html", club=club, competitions=competitions, bookings=bookings[club['name']])
     except IndexError:
         if not request.form['email']:
             flash("Please enter your email.", 'error')
@@ -57,16 +68,17 @@ def purchase_places():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     try:
         places_required = int(request.form['places'])
-
+        places_booked = bookings[request.form['club']][request.form['competition']]
         if places_required > int(club['points']):
             flash('Not enough points left for the club', 'error')
-        elif places_required > 12:
+        elif places_required + places_booked > 12:
             flash("No more than 12 places can be purchased.", 'error')
         else:
             competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
             club['points'] = int(club['points']) - places_required
+            bookings[request.form['club']][request.form['competition']] += places_required
             flash('Booking complete!', 'success')
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club, competitions=competitions, bookings=bookings[club['name']])
 
     except Exception:
         flash('Purchase refused to invalid request.', 'error')
@@ -80,4 +92,4 @@ def show_board():
 
 @app.route('/logout')
 def logout():
-    return redirect(url_for('index'))
+    return render_template('board.html', clubs=clubs, competitions=competitions)
