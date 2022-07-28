@@ -60,9 +60,9 @@ def book(competition, club):
         found_competition = [c for c in competitions if c["name"] == competition][0]
         if found_club and found_competition:
             return render_template('booking.html', club=found_club, competition=found_competition), 200
-        else:
-            flash("Something went wrong-please try again")
-            return render_template('welcome.html', club=club, competitions=competitions), 400
+        # else:
+        #     flash("Something went wrong-please try again")
+        #     return render_template('welcome.html', club=club, competitions=competitions), 400
     except Exception:
         flash('Booking refused to invalid request.', 'error')
         return render_template('board.html', clubs=clubs, competitions=competitions), 400
