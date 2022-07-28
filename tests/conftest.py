@@ -43,17 +43,17 @@ def competitions():
     competitions = [
         {
             "name": "Spring Festival",
-            "date": "2022-01 10:00:00",
+            "date": "2023-6-22 10:00:00",
             "numberOfPlaces": "25"
         },
         {
             "name": "Summer Festival",
-            "date": "2022-6-22 13:30:00",
+            "date": "2023-6-22 13:30:00",
             "numberOfPlaces": "13"
         },
         {
             "name": "Autumn Festival",
-            "date": "2022-10-27 10:00:00",
+            "date": "2023-10-27 10:00:00",
             "numberOfPlaces": "5"
         },
         {

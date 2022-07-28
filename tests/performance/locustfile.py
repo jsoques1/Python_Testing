@@ -23,7 +23,7 @@ class TestPerformanceServer(HttpUser):
         self.client.post(
             '/purchasePlaces',
             data={
-                'places': 1,
+                'places': 0,
                 'club': self.club['name'],
                 'competition': self.competition['name']
             }

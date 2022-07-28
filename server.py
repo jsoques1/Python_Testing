@@ -81,10 +81,10 @@ def purchase_places():
         club = [c for c in clubs if c['name'] == request.form['club']][0]
         # print(club)
         places_required = int(request.form['places'])
-        # print(places_required)
+        # print(f' places_required={places_required}')
         places_booked = bookings[request.form['club']][request.form['competition']]
-        # print(places_booked)
-        if places_required <= 0:
+        # print(f' places_booked={places_booked}')
+        if places_required < 0:
             flash('Required number of places should be at least 1', 'error')
         elif places_required > int(club['points']):
             flash('Not enough points left for the club', 'error')
