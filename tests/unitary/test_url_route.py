@@ -1,39 +1,55 @@
 def test_url_show_board(client):
-    response = client.get('/')
-    expected = b"Clubs board"
-    assert response.status_code == 200
-    assert expected in response.data
+    result = client.get('/')
+    assert result.status_code == 200
+    assert b"Clubs board" in result.data
 
 
 def test_url_index(client):
-    response = client.get('/index')
-    expected = b"Please enter your secretary email to continue:"
-    assert response.status_code == 200
-    assert expected in response.data
+    result = client.get('/index')
+    assert result.status_code == 200
+    assert b"Please enter your secretary email to continue:" in result.data
 
 
 def test_url_show_summary(client):
-    response = client.get('/showSummary')
-    assert response.status_code == 405
+    result = client.get('/showSummary')
+    assert result.status_code == 405
 
 
 def test_url_purchase_places(client):
-    response = client.get('/purchasePlaces')
-    assert response.status_code == 405
+    result = client.get('/purchasePlaces')
+    assert result.status_code == 405
 
 
 def test_url_logout(client):
-    response = client.get('/logout')
-    expected = b"Clubs board"
-    assert response.status_code == 200
-    assert expected in response.data
+    result = client.get('/logout')
+    assert result.status_code == 200
+    assert b"Clubs board" in result.data
 
 
-def test_wrong_url_booking(client):
-    response = client.get('/book/SpringFestival/Simply%20Lift')
-    assert response.status_code == 400
+def test_wrong_url_booking_club(client):
+    result = client.get('/book/SpringFestival/Simply%20Lift')
+    assert result.status_code == 400
+    assert b'Booking refused to invalid request' in result.data
+
+
+def test_wrong_url_booking_competition(client):
+    result = client.get('/book/Spring%20Festival/SimplyLift')
+    assert result.status_code == 400
+    assert b'Booking refused to invalid request' in result.data
+
+
+def test_incomplete_url(client):
+    result = client.get('/book/Spring%20Festival')
+    assert result.status_code == 404
+
+
+def test_wrong_url_root(client):
+    result = client.get('/b00k/Spring%20Festival/Simply%20Lift')
+    assert result.status_code == 404
 
 
 def test_good_url_booking(client):
-    response = client.get('/book/Spring%20Festival/Simply%20Lift')
-    assert response.status_code == 200
+    result = client.get('/book/Spring%20Festival/Simply%20Lift')
+    assert result.status_code == 200
+    assert b'How many places?' in result.data
+    # print(result.get_data(as_text=True))

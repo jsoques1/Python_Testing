@@ -1,5 +1,5 @@
 import pytest
-import server 
+import server
 from server import app
 from server import init_club_bookings
 
@@ -25,13 +25,13 @@ def clubs():
             "points": "12"
         },
         {
-            "name": "Wrong email",
-            "email": "kate@com",
+            "name": "Iron women",
+            "email": "kate@iron.women.com",
             "points": "100"
         },
         {
-            "name": "No points",
-            "email": "kate@shelifts.co.uk",
+            "name": "Club closed",
+            "email": "kate@club.closed.co.uk",
             "points": "0"
          }
     ]
@@ -62,14 +62,24 @@ def competitions():
             "numberOfPlaces": "0"
         },
         {
-            "name": "Planned Festival with wrong date",
-            "date": "22/10/2022 13:30:00",
+            "name": "Planned Festival with old date",
+            "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "2"
         },
         {
-            "name": "Planned Festival with wrong time",
-            "date": "2023-10-22 25:30:60",
+            "name": "Planned Festival with wrong date format",
+            "date": "2023/10/22 25:30:60",
             "numberOfPlaces": "12"
+        },
+        {
+            "name": "Planned Festival with wrong date",
+            "date": "2023-22-22 25:30:60",
+            "numberOfPlaces": "12"
+        },
+        {
+            "name": "Planned Festival with wrong numberOfPlaces",
+            "date": "2023-22-22 25:30:60",
+            "numberOfPlaces": ""
         },
     ]
     return competitions
@@ -83,4 +93,3 @@ def client(mocker, clubs, competitions):
     mocker.patch.object(server, "bookings", bookings)
     with server.app.test_client() as client:
         yield client
-

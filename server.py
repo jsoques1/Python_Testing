@@ -1,5 +1,6 @@
 import json
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, flash
+from datetime import datetime
 
 
 def load_clubs():
@@ -70,18 +71,19 @@ def book(competition, club):
 @app.route('/purchasePlaces', methods=['POST'])
 def purchase_places():
     status_code = 400
-    print(competitions)
-    print(clubs)
-    print(bookings)
+    # print(competitions)
+    # print(clubs)
+    # print(bookings)
+
     try:
         competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-        print(competition)
+        # print(competition)
         club = [c for c in clubs if c['name'] == request.form['club']][0]
-        print(club)
+        # print(club)
         places_required = int(request.form['places'])
-        print(places_required)
+        # print(places_required)
         places_booked = bookings[request.form['club']][request.form['competition']]
-        print(places_booked)
+        # print(places_booked)
         if places_required <= 0:
             flash('Required number of places should be at least 1', 'error')
         elif places_required > int(club['points']):
@@ -91,15 +93,24 @@ def purchase_places():
         elif places_required + places_booked > 12:
             flash("No more than 12 places can be purchased.", 'error')
         else:
+            try:
+                if datetime.strptime(competition["date"], "%Y-%m-%d %H:%M:%S") < datetime.now():
+                    flash("The competition is already finished", 'error')
+                    return render_template('board.html', clubs=clubs, competitions=competitions), 400
+            except ValueError:
+                flash("The date is invalid", 'error')
+                return render_template('board.html', clubs=clubs, competitions=competitions), 400
+
             competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
             club['points'] = int(club['points']) - places_required
+            bookings[request.form['club']][request.form['competition']] += places_required
             flash('Booking complete!', 'success')
             status_code = 200
         return render_template('welcome.html', club=club, competitions=competitions,
                                bookings=bookings[club['name']]), status_code
 
     except Exception:
-        flash('Purchase refused to invalid request.', 'error')
+        flash('Purchase refused to invalid request', 'error')
         return render_template('board.html', clubs=clubs, competitions=competitions), 400
 
 
@@ -118,3 +129,7 @@ def get_club_competition(competition_name, club_name):
     club = [c for c in clubs if c['name'] == club_name][0]
 
     return competition, club
+
+
+def get_bookings(club_name, competition_name):
+    return bookings[club_name][competition_name]
