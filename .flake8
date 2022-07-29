@@ -1,6 +1,7 @@
 [flake8]
 exclude=
     templates
+    reports
     media
     venv
     .idea

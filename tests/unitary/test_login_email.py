@@ -14,6 +14,3 @@ def test_valid_email(client):
     result = client.post('/showSummary', data={'email': 'admin@irontemple.com'})
     assert result.status_code == 200
     assert b'Welcome, admin@irontemple.com' in result.data
-
-
-

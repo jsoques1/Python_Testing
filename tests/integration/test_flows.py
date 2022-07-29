@@ -1,4 +1,4 @@
-from server import get_club_competition, get_bookings
+from server import get_competition_club, get_bookings
 
 
 def test_purchase_flow(client):
@@ -18,7 +18,7 @@ def test_purchase_flow(client):
 
     assert result.status_code == 200
     assert b'Booking complete!' in result.data
-    competition, club = get_club_competition('Autumn Festival', 'Iron Temple')
+    competition, club = get_competition_club('Autumn Festival', 'Iron Temple')
     assert int(competition['numberOfPlaces']) == 2
     assert int(club['points']) == 1
     assert get_bookings('Iron Temple', 'Autumn Festival') == 3
@@ -42,7 +42,7 @@ def test_purchase_flow(client):
 
     assert result.status_code == 200
     assert b'Booking complete!' in result.data
-    competition, club = get_club_competition('Autumn Festival', 'Iron Temple')
+    competition, club = get_competition_club('Autumn Festival', 'Iron Temple')
     assert int(competition['numberOfPlaces']) == 1
     assert int(club['points']) == 0
     assert get_bookings('Iron Temple', 'Autumn Festival') == 4
@@ -66,12 +66,12 @@ def test_purchase_flow(client):
 
     assert result.status_code == 200
     assert b'Booking complete!' in result.data
-    competition, club = get_club_competition('Autumn Festival', 'Simply Lift')
+    competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
     assert int(competition['numberOfPlaces']) == 0
     assert int(club['points']) == 12
     assert get_bookings('Simply Lift', 'Autumn Festival') == 1
 
-    competition, club = get_club_competition('Autumn Festival', 'Iron Temple')
+    competition, club = get_competition_club('Autumn Festival', 'Iron Temple')
     assert int(competition['numberOfPlaces']) == 0
     assert int(club['points']) == 0
     assert get_bookings('Iron Temple', 'Autumn Festival') == 4
@@ -95,17 +95,17 @@ def test_purchase_flow(client):
 
     assert result.status_code == 400
     assert b'Not enough places left for the competition' in result.data
-    competition, club = get_club_competition('Autumn Festival', 'She Lifts')
+    competition, club = get_competition_club('Autumn Festival', 'She Lifts')
     assert int(competition['numberOfPlaces']) == 0
     assert int(club['points']) == 12
     assert get_bookings('She Lifts', 'Autumn Festival') == 0
 
-    competition, club = get_club_competition('Autumn Festival', 'Simply Lift')
+    competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
     assert int(competition['numberOfPlaces']) == 0
     assert int(club['points']) == 12
     assert get_bookings('Simply Lift', 'Autumn Festival') == 1
 
-    competition, club = get_club_competition('Autumn Festival', 'Iron Temple')
+    competition, club = get_competition_club('Autumn Festival', 'Iron Temple')
     assert int(competition['numberOfPlaces']) == 0
     assert int(club['points']) == 0
     assert get_bookings('Iron Temple', 'Autumn Festival') == 4
