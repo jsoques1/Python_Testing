@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block body %}
-    <a class="index" href="{{ url_for('index') }}">Booking manager</a>
+    <a class='index' id='booking_manager' href='{{ url_for('index') }}'>Booking manager</a>
     <br/>
     <br/>
     <h2>Clubs board</h2>
@@ -18,7 +18,7 @@
           <tr>
             <td>{{club['name']}}</td>
             <td>{{club['email']}}</td>
-            <td class="points">{{club['points']}}</td>
+            <td id='points' class='points'>{{club['points']}}</td>
           </tr>
         {% endfor %}
 
@@ -43,7 +43,7 @@
           <tr>
             <td>{{competition['name']}}</td>
             <td>{{competition['date']}}</td>
-            <td class="numberOfPlaces">{{competition['numberOfPlaces']}}</td>
+            <td id='numberOfPlaces' class='numberOfPlaces'>{{competition['numberOfPlaces']}}</td>
           </tr>
         {% endfor %}
 

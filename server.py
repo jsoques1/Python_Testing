@@ -124,7 +124,7 @@ def logout():
     return render_template('board.html', clubs=clubs, competitions=competitions)
 
 
-def get_club_competition(competition_name, club_name):
+def get_competition_club(competition_name, club_name):
     competition = [c for c in competitions if c['name'] == competition_name][0]
     club = [c for c in clubs if c['name'] == club_name][0]
 
