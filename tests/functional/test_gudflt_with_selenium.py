@@ -13,7 +13,7 @@ def get_number(s):
 
 def book_places(competition_name, club_name, nb_of_places, status, msg):
     options = Options()
-    # options.add_argument("headless")
+    options.add_argument("headless")
 
     service = Service(verbose=True)
     driver = webdriver.Edge(service=service, options=options, )
