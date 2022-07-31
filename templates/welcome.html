@@ -10,9 +10,9 @@
         <li>
             {% with id = comp['name'].replace(' ', '_') %}
                 {{comp['name']}}<br/>
-                Date: {{comp['date']}}<br/>
+                Date: {{comp['date']}}
                 <p id="id_{{id}}_numberOfPlaces">Number of remaining places: {{comp['numberOfPlaces']}}</p>
-                <b id="id_{{id}}_booked">Booked for the club: {{bookings[comp['name']]}}</b><br/>
+                <b id="id_{{id}}_booked">Booked for the club: {{bookings[comp['name']]}}</b>
             {% endwith %}
             {%if comp['numberOfPlaces']|int >0%}
                 {% with id = comp['name'].replace(' ', '_') %}

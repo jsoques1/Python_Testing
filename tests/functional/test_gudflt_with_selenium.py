@@ -62,6 +62,9 @@ def book_places(competition_name, club_name, nb_of_places, status, msg):
             assert get_number(number_of_places_after.text) == get_number(number_of_places_before.text) - nb_of_places
             assert get_number(booked_after.text) == get_number(booked_before.text) - nb_of_places
 
+        print(element.text)
+        print(msg)
+
         if element.text != msg:
             assert False
 
@@ -92,6 +95,9 @@ def test_wrong_booking_3():
                          'Error : No more than 12 places can be purchased.')
     assert result
 
+def test_normal_booking_4():
+    result = book_places('Fall Classic', 'Simply Lift', '9', 'success', 'Success : Booking complete!')
+    assert result
 
 def test_exception():
     result = book_places('Dummy Festival', 'Dumb club', '', 'error',

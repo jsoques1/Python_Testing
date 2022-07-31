@@ -75,7 +75,7 @@ pytest --cov=. --cov-report html
 - Lancer le serveur locust
 
 ```
-locust -f tests\performance_tests\locustfile.py
+locust -f tests\performance\locustfile.py
 ```
 
 - Puis lancer le client locust via un brower à l'url [http://localhost:8089](http://localhost:8089) et entrer les pamramètres conseillés:
