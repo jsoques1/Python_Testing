@@ -95,9 +95,11 @@ def test_wrong_booking_3():
                          'Error : No more than 12 places can be purchased.')
     assert result
 
+
 def test_normal_booking_4():
     result = book_places('Fall Classic', 'Simply Lift', '9', 'success', 'Success : Booking complete!')
     assert result
+
 
 def test_exception():
     result = book_places('Dummy Festival', 'Dumb club', '', 'error',
