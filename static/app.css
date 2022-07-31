@@ -73,3 +73,8 @@ textarea {
     text-align: center;
     font-size: x-large;
 }
+
+.index {
+    font-size: 1.5em;
+    font-weight: bold;
+}
