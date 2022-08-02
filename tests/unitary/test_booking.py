@@ -11,7 +11,7 @@ def test_overbooking_no_place_in_competition(client):
     assert b'Not enough places left for the competition' in result.data
     competition, club = get_competition_club('Planned Festival with no place', 'Iron Temple')
     assert int(competition['numberOfPlaces']) == 0
-    assert int(club['points']) == 4
+    assert int(club['points']) == 6
     assert get_bookings('Simply Lift', 'Autumn Festival') == 0
 
 
@@ -19,12 +19,12 @@ def test_overbooking_not_enough_place_in_competition(client):
     result = client.post(
         '/purchasePlaces',
         data={'competition': 'Autumn Festival',
-              'club': 'Simply Lift', 'places': 6}, follow_redirects=True)
+              'club': 'Simply Lift', 'places': 7}, follow_redirects=True)
 
     assert result.status_code == 400
     assert b'Not enough places left for the competition' in result.data
     competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
-    assert int(competition['numberOfPlaces']) == 5
+    assert int(competition['numberOfPlaces']) == 6
     assert int(club['points']) == 13
     assert get_bookings('Simply Lift', 'Autumn Festival') == 0
 
@@ -43,31 +43,31 @@ def test_overbooking_more_than_12_places(client):
     assert get_bookings('Simply Lift', 'Spring Festival') == 0
 
 
-def test_overbooking_in_2_shots(client):
+def test_booking_in_2_shots(client):
 
     result = client.post(
         '/purchasePlaces',
-        data={'competition': 'Autumn Festival',
-              'club': 'Simply Lift', 'places': 3}, follow_redirects=True)
+        data={'competition': 'Summer Festival',
+              'club': 'She Lifts', 'places': 2}, follow_redirects=True)
 
     assert result.status_code == 200
     assert b'Booking complete!' in result.data
-    competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
-    assert int(competition['numberOfPlaces']) == 2
-    assert int(club['points']) == 10
-    assert get_bookings('Simply Lift', 'Autumn Festival') == 3
+    competition, club = get_competition_club('Summer Festival', 'She Lifts')
+    assert int(competition['numberOfPlaces']) == 11
+    assert int(club['points']) == 6
+    assert get_bookings('She Lifts', 'Summer Festival') == 2
 
     result = client.post(
         '/purchasePlaces',
-        data={'competition': 'Autumn Festival',
-              'club': 'She Lifts', 'places': 3}, follow_redirects=True)
+        data={'competition': 'Summer Festival',
+              'club': 'She Lifts', 'places': 2}, follow_redirects=True)
 
-    assert result.status_code == 400
-    assert b'Not enough places left for the competition' in result.data
-    competition, club = get_competition_club('Autumn Festival', 'She Lifts')
-    assert int(competition['numberOfPlaces']) == 2
-    assert int(club['points']) == 12
-    assert get_bookings('She Lifts', 'Autumn Festival') == 0
+    assert result.status_code == 200
+    assert b'Booking complete!' in result.data
+    competition, club = get_competition_club('Summer Festival', 'She Lifts')
+    assert int(competition['numberOfPlaces']) == 9
+    assert int(club['points']) == 0
+    assert get_bookings('She Lifts', 'Summer Festival') == 4
 
 
 def test_overbooking_no_points_in_club(client):
@@ -94,7 +94,7 @@ def test_booking_negative_number_of_place(client):
     assert result.status_code == 400
     assert b'Required number of places should be at least 1' in result.data
     competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
-    assert int(competition['numberOfPlaces']) == 5
+    assert int(competition['numberOfPlaces']) == 6
     assert int(club['points']) == 13
     assert get_bookings('Simply Lift', 'Autumn Festival') == 0
 
@@ -195,11 +195,11 @@ def test_normal_booking(client):
     result = client.post(
         '/purchasePlaces',
         data={'competition': 'Autumn Festival',
-              'club': 'Simply Lift', 'places': 3}, follow_redirects=True)
+              'club': 'Simply Lift', 'places': 2}, follow_redirects=True)
 
     assert result.status_code == 200
     assert b'Booking complete!' in result.data
     competition, club = get_competition_club('Autumn Festival', 'Simply Lift')
-    assert int(competition['numberOfPlaces']) == 2
-    assert int(club['points']) == 10
-    assert get_bookings('Simply Lift', 'Autumn Festival') == 3
+    assert int(competition['numberOfPlaces']) == 4
+    assert int(club['points']) == 7
+    assert get_bookings('Simply Lift', 'Autumn Festival') == 2

@@ -17,7 +17,7 @@ def clubs():
         {
             "name": "Iron Temple",
             "email": "admin@irontemple.com",
-            "points": "4"
+            "points": "6"
         },
         {
             "name": "She Lifts",
@@ -54,7 +54,7 @@ def competitions():
         {
             "name": "Autumn Festival",
             "date": "2023-10-27 10:00:00",
-            "numberOfPlaces": "5"
+            "numberOfPlaces": "6"
         },
         {
             "name": "Planned Festival with no place",
